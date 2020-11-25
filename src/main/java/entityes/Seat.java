@@ -8,7 +8,7 @@ import java.util.List;
 public class Seat {
     @Id
     @Column(name = "seat_Id")
-    private Integer seeatId;
+    private Integer seatId;
     @Column(name="row_num")
     private Integer row_num;
     @Column(name="place_num")
@@ -18,15 +18,25 @@ public class Seat {
     private Hall hall;
     @Column(name="place_type")
     private Integer placeType;
+    @OneToMany(cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY,
+            mappedBy = "seat")
+    private List<Ticket> tickets = new ArrayList<>();
 
-
-
-    public Integer getSeeatId() {
-        return seeatId;
+    public List<Ticket> getTickets() {
+        return tickets;
     }
 
-    public void setSeeatId(Integer seeatId) {
-        this.seeatId = seeatId;
+    public void setTickets(List<Ticket> tickets) {
+        this.tickets = tickets;
+    }
+
+    public Integer getSeatId() {
+        return seatId;
+    }
+
+    public void setSeatId(Integer seatId) {
+        this.seatId = seatId;
     }
 
     public Integer getRow_num() {

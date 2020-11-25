@@ -8,10 +8,12 @@ public class Ticket {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="ticket_Id")
     private Integer ticketId;
-    @Column(name="place_num")
-    private Integer placeNum;
-    @Column(name="session_id")
-    private Integer sessionId;
+    @ManyToOne
+    @JoinColumn(name="seat_id")
+    private Seat seat;
+    @ManyToOne
+    @JoinColumn(name="session_Id")
+    private Session session;
 
 
     public Integer getTicketId() {
@@ -22,19 +24,19 @@ public class Ticket {
         this.ticketId = ticketId;
     }
 
-    public Integer getPlaceNum() {
-        return placeNum;
+    public Seat getSeat() {
+        return seat;
     }
 
-    public void setPlaceNum(Integer placeNum) {
-        this.placeNum = placeNum;
+    public void setSeat(Seat seat) {
+        this.seat = seat;
     }
 
-    public Integer getSessionId() {
-        return sessionId;
+    public Session getSession() {
+        return session;
     }
 
-    public void setSessionId(Integer sessionId) {
-        this.sessionId = sessionId;
+    public void setSession(Session session) {
+        this.session = session;
     }
 }

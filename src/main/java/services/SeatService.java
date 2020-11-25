@@ -9,4 +9,5 @@ public class SeatService {
 
     @Autowired
     private SeatRepository seatRepository;
+
 }

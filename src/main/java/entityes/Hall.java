@@ -7,8 +7,8 @@ import java.util.List;
 @Entity
 public class Hall {
     @Id
-    @Column(name="holl_id")
-    private Integer hollId;
+    @Column(name="hall_id")
+    private Integer hallId;
     @OneToMany(cascade = CascadeType.ALL,
             fetch = FetchType.LAZY,
             mappedBy = "hall")
@@ -18,12 +18,12 @@ public class Hall {
             mappedBy = "hall")
     private List<Session> sessions = new ArrayList<>();
 
-    public Integer getHollId() {
-        return hollId;
+    public Integer getHallId() {
+        return hallId;
     }
 
-    public void setHollId(Integer hollId) {
-        this.hollId = hollId;
+    public void setHallId(Integer hallId) {
+        this.hallId = hallId;
     }
 
     public List<Seat> getSeats() {

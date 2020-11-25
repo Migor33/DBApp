@@ -17,7 +17,7 @@ public class FilmServices {
         return filmRepository.getAllFilms();
     }
 
-    public Film getFilmSessions(Integer id) {
+    public Film getFilm(Integer id) {
         return filmRepository.findById(id).get();
     }
 }
