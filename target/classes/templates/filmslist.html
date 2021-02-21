@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <style>
+   .center {
+    width: 30%; /* Ширина элемента в пикселах */
+    padding: 10px; /* Поля вокруг текста */
+    margin: auto; /* Выравниваем по центру */
+    background: #fc0; /* Цвет фона */
+   }
+   .film {
+    width: 95%; /* Ширина элемента в пикселах */
+    top: 10%;
+    padding: 10px; /* Поля вокруг текста */
+    margin: auto; /* Выравниваем по центру */
+    background: #2F4F4F; /* Цвет фона */
+   }
+  </style>
+</head>
+<script type= "text/javascript">
+function add()
+{
+	var name = document.getElementById('name').value;
+	var genre = document.getElementById('genre').value;
+	document.location.href = "http://localhost:8080/makeFilm?name="+name+"&genre="+genre;
+}
+</script>
+<body>
+<div class="center">
+    <div th:each="film :${films}">
+        <a th:href="@{/film(filmId=${film.film_id})}"><td th:text="${film.name} + ': ' + ${film.genre}"></td></a>
+        <br>
+    </div>
+    <form th:if="${admin}" name="test" method="post">
+        <h3>Добавить фильм</h3>
+        <p><b>Название фильма:</b><br>
+            <input id="name" type="text" size="40">
+        </p>
+        <p><b>Жанр:</b><br>
+            <input id="genre" size="40">
+        </p>
+    </form>
+    <button th:if="${admin}" onclick="add()">Создать</button>
+</div>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <style>
+   .center {
+    width: 30%; /* Ширина элемента в пикселах */
+    padding: 10px; /* Поля вокруг текста */
+    margin: auto; /* Выравниваем по центру */
+    background: #fc0; /* Цвет фона */
+   }
+   .film {
+    width: 95%; /* Ширина элемента в пикселах */
+    top: 10%;
+    padding: 10px; /* Поля вокруг текста */
+    margin: auto; /* Выравниваем по центру */
+    background: #2F4F4F; /* Цвет фона */
+   }
+  </style>
+</head>
+<body>
+<script type= "text/javascript">
+function add(filmId)
+{
+	var date = document.getElementById('date').value;
+	var hallId = document.getElementById('hallId').value;
+	var price = document.getElementById('price').value;
+	var VIPprice = document.getElementById('VIPprice').value;
+	document.location.href = "http://localhost:8080/makeSession?date="+date+"&hallId="+hallId+"&price="+price+"&VIPprice="+VIPprice+"&filmId="+filmId;
+}
+</script>
+<div class="center">
+        <td th:text="${film.name} + ': ' + ${film.genre}"></td>
+        <button th:if="${admin}">Удалить фильм</button>
+        <div th:each="ses :${film.sessions}">
+            <a th:href="@{/ses(sessionId=${ses.session_Id})}"><td th:text="${film.name} + ': ' + ${ses.date} + 'зал ' + ${ses.hall.hallId}"></td></a>
+            <br>
+        </div>
+        <br>
+    <form th:if="${admin}">
+        <h3>Добавить сеанс</h3>
+        <p><b>Дата:</b><br>
+            <input id="date" type="date">
+        </p>
+        <p><b>Зал:</b><br>
+            <input id="hallId" size="40">
+        </p>
+        <p><b>Цена обычного билета:</b><br>
+            <input id="price" size="40">
+        </p>
+        <p><b>Цена вип кресла:</b><br>
+            <input id="VIPprice" size="40">
+        </p>
+    </form>
+    <button th:if="${admin}" th:attr="onclick=|add('${film.film_id}')|">Создать</button>
+</div>
+</body>
+</html>
